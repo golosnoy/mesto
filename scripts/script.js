@@ -14,11 +14,13 @@ function EditProfile() {
     profileFormSubtitle.value = profileSubtitle.textContent;
     overlay.style.display = "block";
     profileForm.style.display = "block";
+    document.body.style.overflow = 'hidden';
 }
 
 function CloseProfileForm() {
     overlay.style.display = "none";
     profileForm.style.display = "none";
+    document.body.style.overflow = 'visible';
 }
 
 function SubmitProfile() {
