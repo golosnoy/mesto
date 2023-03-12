@@ -15,3 +15,9 @@
             background-image: url(../../../images/add_button_wide.png);
         }
 }
+@media screen and (max-width: 320px) {
+    .profile__add-button {
+            width: 282px;
+            margin: 29px auto 0;
+        }
+}

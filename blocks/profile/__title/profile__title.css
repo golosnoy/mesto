@@ -5,10 +5,18 @@
     margin-top: 58px;
     margin-block-end: 0;
 }
+
 @media screen and (max-width: 630px) {
     .profile__title {
             margin-top: 22px;
             font-size: 27px;
             line-height: 33px;
+        }
+}
+
+@media screen and (max-width: 320px) {
+    .profile__title {
+            margin-top: 26px;
+            margin-left: 40px;
         }
 }

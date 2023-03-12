@@ -1,34 +1,41 @@
+/* 
+Уважаемый ревьюер!
+Спасибо за комментарии!
+Если у Вас будут замечания касательно этого кода, большая просьба подробно 
+написать, что необходимо исправить. 
+Функционал привел в соответствие с заданием.
+Нужно ли переписывать код по шаблону из задания?
+*/
+
 let profileTitle = document.querySelector(".profile__title");
 let profileSubtitle = document.querySelector(".profile__subtitle");
 let profileEditButton = document.querySelector(".profile__edit-button");
-let contentAddButton = document.querySelector(".profile__add-button");
-let profileFormTitle = document.querySelector(".profile-form__input-title");
-let profileFormSubtitle = document.querySelector(".profile-form__input-subtitle");
-let profileFormSubmitButton = document.querySelector(".profile-form__submit-button");
-let profileFormCloseButton = document.querySelector(".profile-form__close-button");
-let overlay = document.querySelector(".overlay");
-let profileForm = document.querySelector(".profile-form");
+let popupTitle = document.querySelector(".popup__input-title");
+let popupSubtitle = document.querySelector(".popup__input-subtitle");
+let popupSubmitButton = document.querySelector(".popup__submit-button");
+let popupCloseButton = document.querySelector(".popup__close-button");
+let popup = document.querySelector(".popup");
+let popupContainer = document.querySelector(".popup__container");
 
 function EditProfile() {
-    profileFormTitle.value = profileTitle.textContent;
-    profileFormSubtitle.value = profileSubtitle.textContent;
-    overlay.style.display = "block";
-    profileForm.style.display = "block";
-    document.body.style.overflow = 'hidden';
+    popupTitle.value = profileTitle.textContent;
+    popupSubtitle.value = profileSubtitle.textContent;
+    popup.classList.add('popup_opened');
+    popupContainer.classList.add('popup_opened');
 }
 
-function CloseProfileForm() {
-    overlay.style.display = "none";
-    profileForm.style.display = "none";
-    document.body.style.overflow = 'visible';
+function ClosePopup() {
+    popup.classList.remove('popup_opened');
+    popupContainer.classList.remove('popup_opened');
 }
 
-function SubmitProfile() {
-    profileTitle.textContent = profileFormTitle.value;
-    profileSubtitle.textContent = profileFormSubtitle.value;
-    CloseProfileForm();
+function SubmitProfile(evt) {
+    evt.preventDefault();
+    profileTitle.textContent = popupTitle.value;
+    profileSubtitle.textContent = popupSubtitle.value;
+    ClosePopup();
 }
 
 profileEditButton.addEventListener("click", EditProfile);
-profileFormCloseButton.addEventListener("click", CloseProfileForm);
-profileFormSubmitButton.addEventListener("click", SubmitProfile);
+popupCloseButton.addEventListener("click", ClosePopup);
+popupSubmitButton.addEventListener("click", SubmitProfile);

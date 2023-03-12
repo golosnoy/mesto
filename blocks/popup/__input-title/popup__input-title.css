@@ -1,8 +1,8 @@
-.profile-form__input-title {
+.popup__input-title {
     margin-top: 54px;
 }
 @media screen and (max-width: 630px) {
-    .profile-form__input-title {
+    .popup__input-title {
             margin-top: 75px;
         }
 }
