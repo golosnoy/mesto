@@ -10,7 +10,6 @@
         <div class="page__container">
             <header class="header">
                 <img src="./images/logo.svg" alt="Логотип" class="header__logo">
-                <img src="./images/Line.png" alt="Линия" class="header__line">
             </header>
 
             <main class="content">
@@ -20,68 +19,56 @@
                         <div class="profile__info">
                             <div class="profile__title-block">
                                 <h1 class="profile__title">Жак-Ив Кусто</h1>
-                                <button class="profile__edit-button" type="button"></button>
+                                <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
                             </div>
                             <p class="profile__subtitle">Исследователь океана</p>
                         </div>
                     </div>
-                    <button class="profile__add-button" type="button"></button>
+                    <button class="profile__add-button" type="button" aria-label="Добавить контент"></button>
                 </section>
 
                 <section class="cards">
                     <ul class="cards__elements">
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Карачаевск</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Карачаевск</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Гора Эльбрус</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Гора Эльбрус</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Домбай</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Домбай</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Гора Эльбрус</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Гора Эльбрус</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Домбай</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Домбай</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                         <li class="cards__element">
-                            <div class="cards__group">
-                                <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаево-Черкессия" class="cards__image">
-                                <div class="cards__desc">
-                                    <h2 class="cards__title">Карачаево-Черкессия</h2>
-                                    <img src="./images/like.svg" alt="Кнопка нравится" class="cards__like">
-                                </div>
+                            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаево-Черкессия" class="cards__image">
+                            <div class="cards__desc">
+                                <h2 class="cards__title">Карачаево-Черкессия</h2>
+                                <button type="button" aria-label="Нравится" class="cards__like"></button>
                             </div>
                         </li>
                     </ul>
@@ -94,13 +81,13 @@
         </div>
 
         <div class="popup">
-            <div class="popup__container">
-                <p class="popup__title">Редактировать профиль</p>
-                <input class="popup__input-text popup__input-title" type="text">
-                <input class="popup__input-text popup__input-subtitle" type="text">
-                <button class="popup__submit-button">Сохранить</button>
-                <button class="popup__close-button" type="button"></button>
-            </div>
+            <form class="popup__container" name="edit_profile" method="POST">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__input-text" type="text" name="author_name" placeholder="Имя">
+                <input class="popup__input-text" type="text" name="author_about" placeholder="О себе">
+                <button class="popup__submit-button" type="submit">Сохранить</button>
+                <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
+            </form>
         </div>
         <script src="./scripts/script.js"></script>
     </body>

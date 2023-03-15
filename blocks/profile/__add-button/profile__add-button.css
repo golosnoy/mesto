@@ -8,6 +8,10 @@
     justify-items: flex-end;
     margin-top: 70px;
 }
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
 @media screen and (max-width: 926px) {
     .profile__add-button {
             width: 282px;
@@ -17,7 +21,6 @@
 }
 @media screen and (max-width: 320px) {
     .profile__add-button {
-            width: 282px;
             margin: 29px auto 0;
         }
 }
