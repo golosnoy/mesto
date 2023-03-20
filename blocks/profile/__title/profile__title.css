@@ -2,12 +2,12 @@
     font-weight: 500;
     font-size: 42px;
     line-height: 48px;
-    margin-top: 58px;
+    margin-top: 59.5px;
     margin-block-end: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: 394px;
+    max-width: 300px;
 }
 
 @media screen and (max-width: 630px) {
@@ -15,12 +15,12 @@
             margin-top: 22px;
             font-size: 27px;
             line-height: 33px;
+            max-width: 220px;
         }
 }
 
 @media screen and (max-width: 320px) {
     .profile__title {
-            margin-top: 26px;
-            margin-left: 40px;
+            margin-top: 24px;
         }
 }

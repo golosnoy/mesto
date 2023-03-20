@@ -1,12 +1,12 @@
 let profileTitle = document.querySelector(".profile__title");
 let profileSubtitle = document.querySelector(".profile__subtitle");
 let profileEditButton = document.querySelector(".profile__edit-button");
-let popupTitle = document.querySelector('input[name="author_name"]');
-let popupSubtitle = document.querySelector('input[name="author_about"]');
+let popupTitle = document.querySelector("#author_name");
+let popupSubtitle = document.querySelector("#author_about");
 let popupSubmitButton = document.querySelector(".popup__submit-button");
 let popupCloseButton = document.querySelector(".popup__close-button");
 let popup = document.querySelector(".popup");
-let popupContainer = document.querySelector(".popup__container");
+let popupForm = document.querySelector(".popup__form");
 
 function editProfile() {
     popupTitle.value = profileTitle.textContent;
@@ -27,4 +27,4 @@ function submitProfile(evt) {
 
 profileEditButton.addEventListener("click", editProfile);
 popupCloseButton.addEventListener("click", closePopup);
-popupContainer.addEventListener("submit", submitProfile);
+popupForm.addEventListener("submit", submitProfile);
