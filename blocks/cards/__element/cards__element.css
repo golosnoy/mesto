@@ -4,4 +4,5 @@
     height: 361.5px;
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
 }

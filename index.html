@@ -26,50 +26,7 @@
                 </section>
 
                 <section class="cards">
-                    <ul class="cards__elements">
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Карачаевск</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Гора Эльбрус</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Домбай</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-14046831-unsplash.png" alt="Гора Эльбрус" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Гора Эльбрус</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Домбай</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                        <li class="cards__element">
-                            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаево-Черкессия" class="cards__image">
-                            <div class="cards__desc">
-                                <h2 class="cards__title">Карачаево-Черкессия</h2>
-                                <button type="button" aria-label="Нравится" class="cards__like"></button>
-                            </div>
-                        </li>
-                    </ul>
+                    <ul class="cards__elements"></ul>
                 </section>
             </main>
 
@@ -80,15 +37,47 @@
 
         <div class="popup">
             <div class="popup__container">
-              <form class="popup__form"  name="edit_profile" method="POST">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input-text" type="text" name="author_name" placeholder="Имя" id="author_name">
-                <input class="popup__input-text" type="text" name="author_about" placeholder="О себе" id="author_about">
-                <button class="popup__submit-button" type="submit">Сохранить</button>
-              </form>
-              <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
+                <form class="popup__form" name="edit_profile" method="POST">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input class="popup__input-text" type="text" name="author_name" placeholder="Имя" id="author_name">
+                    <input class="popup__input-text" type="text" name="author_about" placeholder="О себе" id="author_about">
+                    <button class="popup__submit-button" type="submit">Сохранить</button>
+                </form>
+                <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
             </div>
         </div>
+
+        <div class="popup-content">
+            <div class="popup-content__container">
+                <form class="popup-content__form" name="edit_profile" method="POST">
+                    <h2 class="popup-content__title">Новое место</h2>
+                    <input class="popup-content__input-text" type="text" name="place_name" placeholder="Название" id="place_name">
+                    <input class="popup-content__input-text" type="text" name="img_url" placeholder="Ссылка на картинку" id="img_url">
+                    <button class="popup-content__submit-button" type="submit">Создать</button>
+                </form>
+                <button class="popup-content__close-button" type="button" aria-label="Закрыть окно"></button>
+            </div>
+        </div>
+
+        <div class="popup-image">
+            <div class="popup-image__container">
+                <img class="popup-image__image">
+                <p class="popup-image__title"></p>
+                <button class="popup-image__close-button" type="button" aria-label="Закрыть окно"></button>
+            </div>
+        </div>
+
+        <template id="card-template">
+            <li class="cards__element">
+                <img class="cards__image">
+                <div class="cards__desc">
+                    <h2 class="cards__title"></h2>
+                    <button type="button" aria-label="Нравится" class="cards__like"></button>
+                    <button type="button" aria-label="Корзина" class="cards__trash"></button>
+                </div>
+            </li>
+        </template>
+
         <script src="./scripts/script.js"></script>
     </body>
 </html>
