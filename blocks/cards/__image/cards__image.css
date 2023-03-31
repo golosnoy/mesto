@@ -4,3 +4,7 @@
     height: 282px;
     display: block;
 }
+
+.cards__image:hover {
+  cursor: pointer;
+}
