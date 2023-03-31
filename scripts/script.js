@@ -1,51 +1,25 @@
-const initialCards = [
-  {
-      name: "Архыз",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-      name: "Челябинская область",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-      name: "Иваново",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-      name: "Камчатка",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-      name: "Холмогорский район",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-      name: "Байкал",
-      link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const cards = document.querySelector(".cards__elements");
 
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 const profileEditButton = document.querySelector(".profile__edit-button");
+
 const contentAddButton = document.querySelector(".profile__add-button");
-const contentDeleteButton = document.querySelector(".cards__trash");
+const contenttrashButton = document.querySelector(".cards__trash");
 
-const popupTitle = document.querySelector("#author_name");
-const popupSubtitle = document.querySelector("#author_about");
-const popupSubmitButton = document.querySelector(".popup__submit-button");
-const popupCloseButton = document.querySelector(".popup__close-button");
-const popup = document.querySelector(".popup");
-const popupForm = document.querySelector(".popup__form");
+const popupProfile = document.querySelector(".popup");
+const popupProfileForm = document.querySelector(".popup__form");
+const popupProfileTitle = document.querySelector("#author_name");
+const popupProfileSubtitle = document.querySelector("#author_about");
+const popupProfileSubmitButton = document.querySelector(".popup__submit-button");
+const popupProfileCloseButton = document.querySelector(".popup__close-button");
 
+const popupContent = document.querySelector(".popup-content");
+const popupContentForm = document.querySelector(".popup-content__form");
 const popupContentPlaceName = document.querySelector("#place_name");
 const popupContentImageUrl = document.querySelector("#img_url");
 const popupContentSubmitButton = document.querySelector(".popup-content__submit-button");
 const popupContentCloseButton = document.querySelector(".popup-content__close-button");
-const popupContent = document.querySelector(".popup-content");
-const popupContentForm = document.querySelector(".popup-content__form");
 
 const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButton = document.querySelector(".popup-image__close-button");
@@ -58,16 +32,20 @@ function getClone() {
   return cardsElement;
 }
 
+function renderCard(cardsElement) {
+  cards.prepend(cardsElement);
+  likeButtonListener(cardsElement);
+  trashButtonListener(cardsElement);
+  contentImageListener(cardsElement);
+}
+
 function createContent() {
   initialCards.forEach(function (item) {
       const cardsElement = getClone();
       cardsElement.querySelector(".cards__title").textContent = item.name;
       cardsElement.querySelector(".cards__image").src = item.link;
       cardsElement.querySelector(".cards__image").alt = item.name;
-      cards.append(cardsElement);
-      addButtonListener(cardsElement);
-      deleteButtonListener(cardsElement);
-      contentImageListener(cardsElement);
+      renderCard(cardsElement);
   });
 }
 
@@ -77,21 +55,26 @@ function addContent(evt) {
   cardsElement.querySelector(".cards__title").textContent = popupContentPlaceName.value;
   cardsElement.querySelector(".cards__image").src = popupContentImageUrl.value;
   cardsElement.querySelector(".cards__image").alt = popupContentPlaceName.value;
-  cards.prepend(cardsElement);
-  addButtonListener(cardsElement);
-  deleteButtonListener(cardsElement);
-  contentImageListener(cardsElement);
+  renderCard(cardsElement);
   closePopupContent();
 }
 
 function editProfile() {
-  popupTitle.value = profileTitle.textContent;
-  popupSubtitle.value = profileSubtitle.textContent;
-  popup.classList.add("popup_opened");
+  popupProfileTitle.value = profileTitle.textContent;
+  popupProfileSubtitle.value = profileSubtitle.textContent;
+  popupProfile.classList.add("popup_opened");
 }
 
-function closePopup() {
-  popup.classList.remove("popup_opened");
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+function closePopupProfile() {
+  popupProfile.classList.remove("popup_opened");
 }
 
 function closePopupContent() {
@@ -106,25 +89,25 @@ function closePopupImage() {
 
 function submitProfile(evt) {
   evt.preventDefault();
-  profileTitle.textContent = popupTitle.value;
-  profileSubtitle.textContent = popupSubtitle.value;
-  closePopup();
+  profileTitle.textContent = popupProfileTitle.value;
+  profileSubtitle.textContent = popupProfileSubtitle.value;
+  closePopupProfile();
 }
 
 function openPopupContent() {
   popupContent.classList.add("popup-content_opened");
 }
 
-function addButtonListener(cardItem) {
+function likeButtonListener(cardItem) {
   const likeButton = cardItem.querySelector(".cards__like");
   likeButton.addEventListener("click", function (evt) {
       evt.target.classList.toggle("cards__like_active");
   });
 }
 
-function deleteButtonListener(cardItem) {
-  const deleteButton = cardItem.querySelector(".cards__trash");
-  deleteButton.addEventListener("click", function () {
+function trashButtonListener(cardItem) {
+  const trashButton = cardItem.querySelector(".cards__trash");
+  trashButton.addEventListener("click", function () {
       cardItem.remove();
   });
 }
@@ -141,8 +124,8 @@ function contentImageListener(cardItem) {
 }
 
 profileEditButton.addEventListener("click", editProfile);
-popupCloseButton.addEventListener("click", closePopup);
-popupForm.addEventListener("submit", submitProfile);
+popupProfileCloseButton.addEventListener("click", closePopupProfile);
+popupProfileForm.addEventListener("submit", submitProfile);
 contentAddButton.addEventListener("click", openPopupContent);
 popupContentCloseButton.addEventListener("click", closePopupContent);
 popupContentForm.addEventListener("submit", addContent);
