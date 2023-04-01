@@ -49,15 +49,11 @@ function createContent() {
 
 function addContent(evt) {
     evt.preventDefault();
-    if (popupContentPlaceName.value && popupContentImageUrl.value) {
-        const cardTitle = popupContentPlaceName.value;
-        const cardImage = popupContentImageUrl.value;
-        newCard = renderCard(cardTitle, cardImage);
-        cards.prepend(newCard);
-        closePopup(popupContent);
-    } else {
-        closePopup(popupContent);
-    }
+    const cardTitle = popupContentPlaceName.value;
+    const cardImage = popupContentImageUrl.value;
+    newCard = renderCard(cardTitle, cardImage);
+    cards.prepend(newCard);
+    closePopup(popupContent);
 }
 
 function openPopup(popup) {
