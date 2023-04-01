@@ -25,9 +25,9 @@ const popupImage = document.querySelector(".popup_image");
 const popupImageCloseButton = document.querySelector(".popup__close-button_image");
 const popupImageImg = popupImage.querySelector(".popup__image");
 const popupImageTitle = popupImage.querySelector(".popup__image-title");
+const cardTemplate = document.querySelector("#card-template").content;
 
 function renderCard(cardTitle, cardImage) {
-    const cardTemplate = document.querySelector("#card-template").content;
     const newCard = cardTemplate.querySelector(".cards__element").cloneNode(true);
     newCard.querySelector(".cards__title").textContent = cardTitle;
     newCard.querySelector(".cards__image").src = cardImage;
@@ -54,9 +54,9 @@ function addContent(evt) {
         const cardImage = popupContentImageUrl.value;
         newCard = renderCard(cardTitle, cardImage);
         cards.prepend(newCard);
-        closePopup(evt);
+        closePopup(popupContent);
     } else {
-        closePopup(evt);
+        closePopup(popupContent);
     }
 }
 
@@ -64,8 +64,8 @@ function openPopup(popup) {
     popup.classList.add("popup_opened");
 }
 
-function closePopup(evt) {
-    evt.target.closest("div.popup_opened").classList.remove("popup_opened");
+function closePopup(popup) {
+    popup.classList.remove("popup_opened");
 }
 
 function openProfile(evt) {
@@ -78,7 +78,7 @@ function submitProfile(evt) {
     evt.preventDefault();
     profileTitle.textContent = popupProfileTitle.value;
     profileSubtitle.textContent = popupProfileSubtitle.value;
-    closePopup(evt);
+    closePopup(popupProfile);
 }
 
 function openPopupContent(evt) {
@@ -113,11 +113,13 @@ function contentImageListener(cardItem) {
 }
 
 profileEditButton.addEventListener("click", openProfile);
-popupProfileCloseButton.addEventListener("click", closePopup);
 popupProfileForm.addEventListener("submit", submitProfile);
 contentAddButton.addEventListener("click", openPopupContent);
-popupContentCloseButton.addEventListener("click", closePopup);
 popupContentForm.addEventListener("submit", addContent);
-popupImageCloseButton.addEventListener("click", closePopup);
+
+document.querySelectorAll('.popup__close-button').forEach(button => {
+  const buttonsPopup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(buttonsPopup));
+});
 
 createContent();

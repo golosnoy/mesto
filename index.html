@@ -39,8 +39,8 @@
             <div class="popup__container">
                 <form class="popup__form popup__form_profile" name="edit_profile" method="POST">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__input-text" type="text" name="author_name" placeholder="Имя" id="author_name">
-                    <input class="popup__input-text" type="text" name="author_about" placeholder="О себе" id="author_about">
+                    <input class="popup__input-text" type="text" name="author_name" placeholder="Имя" id="author_name" required>
+                    <input class="popup__input-text" type="text" name="author_about" placeholder="О себе" id="author_about" required>
                     <button class="popup__submit-button" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__close-button popup__close-button_profile" type="button" aria-label="Закрыть окно"></button>
@@ -51,8 +51,8 @@
             <div class="popup__container">
                 <form class="popup__form popup__form_content" name="new_content" method="POST">
                     <h2 class="popup__title">Новое место</h2>
-                    <input class="popup__input-text" type="text" name="place_name" placeholder="Название" id="place_name">
-                    <input class="popup__input-text" type="text" name="img_url" placeholder="Ссылка на картинку" id="img_url">
+                    <input class="popup__input-text" type="text" name="place_name" placeholder="Название" id="place_name" required>
+                    <input class="popup__input-text" type="text" name="img_url" placeholder="Ссылка на картинку" id="img_url" required>
                     <button id="popup-content__submit-button" class="popup__submit-button" type="submit">Создать</button>
                 </form>
                 <button class="popup__close-button popup__close-button_content" type="button" aria-label="Закрыть окно"></button>
