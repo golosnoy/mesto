@@ -40,9 +40,9 @@
                 <form class="popup__form popup__form_profile" name="edit_profile" method="POST" novalidate>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input" type="text" name="author_name" placeholder="Имя" id="author_name" minlength=2 maxlength=40 required>
-                    <span class="popup__input-error author_name-error"></span>
+                    <span class="popup__input-error author_name_error"></span>
                     <input class="popup__input" type="text" name="author_about" placeholder="О себе" id="author_about" minlength=2 maxlength=200 required>
-                    <span class="popup__input-error author_about-error"></span>
+                    <span class="popup__input-error author_about_error"></span>
                     <button class="popup__submit-button" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__close-button popup__close-button_profile" type="button" aria-label="Закрыть окно"></button>
@@ -54,9 +54,9 @@
                 <form class="popup__form popup__form_content" name="new_content" method="POST" novalidate>
                     <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input" type="text" name="place_name" placeholder="Название" id="place_name" minlength=2 maxlength=30 required>
-                    <span class="popup__input-error place_name-error"></span>
+                    <span class="popup__input-error place_name_error"></span>
                     <input class="popup__input" type="url" name="img_url" placeholder="Ссылка на картинку" id="img_url" required>
-                    <span class="popup__input-error img_url-error"></span>
+                    <span class="popup__input-error img_url_error"></span>
                     <button id="popup-content__submit-button" class="popup__submit-button" type="submit">Создать</button>
                 </form>
                 <button class="popup__close-button popup__close-button_content" type="button" aria-label="Закрыть окно"></button>
