@@ -148,14 +148,14 @@ document.querySelectorAll(".popup__close-button").forEach((button) => {
 createContent();
 
 const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}__error`);
+    const errorElement = formElement.querySelector(`.popup__${inputElement.id}_error`);
     inputElement.classList.add("popup__input_type_error");
     errorElement.textContent = errorMessage;
     errorElement.classList.add("popup__input-error_active");
 };
 
 const hideInputError = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}__error`);
+    const errorElement = formElement.querySelector(`.popup__${inputElement.id}_error`);
     inputElement.classList.remove("popup__input_type_error");
     errorElement.classList.remove("popup__input-error_active");
     errorElement.textContent = "";
