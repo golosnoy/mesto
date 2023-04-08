@@ -53,7 +53,20 @@ function addContent(evt) {
     const cardImage = popupContentImageUrl.value;
     newCard = renderCard(cardTitle, cardImage);
     cards.prepend(newCard);
+    clearErrors(popupContent);
     closePopup(popupContent);
+}
+
+function clearErrors(popup) {
+  const errorList = Array.from(popup.querySelectorAll(".popup__input-error"));
+    errorList.forEach((errorElement) => {
+        errorElement.classList.remove("popup__input-error_active");
+        errorElement.textContent = "";
+    });
+    const inputList = Array.from(popup.querySelectorAll(".popup__input"));
+    inputList.forEach((inputElement) => {
+        inputElement.classList.remove("popup__input_type_error");
+    });
 }
 
 function openPopup(popup) {
@@ -63,15 +76,6 @@ function openPopup(popup) {
 }
 
 function closePopup(popup) {
-    const errorList = Array.from(popup.querySelectorAll(".popup__input-error"));
-    errorList.forEach((errorElement) => {
-        errorElement.classList.remove("popup__input-error_active");
-        errorElement.textContent = "";
-    });
-    const inputList = Array.from(popup.querySelectorAll(".popup__input"));
-    inputList.forEach((inputElement) => {
-        inputElement.classList.remove("popup__input_type_error");
-    });
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closePopupByPressEsc);
     popup.removeEventListener("click", closePopupByClickOverlay);
@@ -80,14 +84,15 @@ function closePopup(popup) {
 function closePopupByPressEsc(evt) {
     if (evt.key === "Escape") {
         const popupOpened = document.querySelector(".popup_opened");
+        clearErrors(popupOpened);
         closePopup(popupOpened);
     }
 }
 
 function closePopupByClickOverlay(evt) {
     if (evt.target === evt.currentTarget) {
-        const popupOpened = document.querySelector(".popup_opened");
-        closePopup(popupOpened);
+      clearErrors(evt.target);
+        closePopup(evt.target);
     }
 }
 
@@ -101,12 +106,15 @@ function submitProfile(evt) {
     evt.preventDefault();
     profileTitle.textContent = popupProfileTitle.value;
     profileSubtitle.textContent = popupProfileSubtitle.value;
+    clearErrors(popupProfile);
     closePopup(popupProfile);
 }
 
 function openPopupContent(evt) {
-    popupContentPlaceName.value = "";
-    popupContentImageUrl.value = "";
+    popupContentForm.reset();
+    buttonElement = popupContentForm.querySelector('.popup__submit-button');
+    buttonElement.classList.add("popup__submit-button_inactive");
+    buttonElement.setAttribute('disabled', true);
     openPopup(popupContent);
 }
 
@@ -142,63 +150,10 @@ popupContentForm.addEventListener("submit", addContent);
 
 document.querySelectorAll(".popup__close-button").forEach((button) => {
     const buttonsPopup = button.closest(".popup");
-    button.addEventListener("click", () => closePopup(buttonsPopup));
+    button.addEventListener("click", function() {
+      clearErrors(buttonsPopup);
+      closePopup(buttonsPopup);
+    });
 });
 
 createContent();
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.popup__input-error_${inputElement.id}`);
-    inputElement.classList.add("popup__input_type_error");
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add("popup__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.popup__input-error_${inputElement.id}`);
-    inputElement.classList.remove("popup__input_type_error");
-    errorElement.classList.remove("popup__input-error_active");
-    errorElement.textContent = "";
-};
-
-const isValid = (formElement, inputElement) => {
-    if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else {
-        hideInputError(formElement, inputElement);
-    }
-};
-
-const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-    if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add("popup__submit-button_inactive");
-    } else {
-        buttonElement.classList.remove("popup__submit-button_inactive");
-    }
-};
-
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-    const buttonElement = formElement.querySelector(".popup__submit-button");
-    inputList.forEach((inputElement) => {
-        inputElement.addEventListener("input", () => {
-            isValid(formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
-        });
-    });
-};
-
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll(".popup__form"));
-    formList.forEach((formElement) => {
-        setEventListeners(formElement);
-    });
-};
-
-enableValidation();
