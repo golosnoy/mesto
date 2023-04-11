@@ -1,56 +1,54 @@
-const showInputError = (inputElement, errorElement, errorMessage) => {
-    inputElement.classList.add("popup__input_type_error");
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add("popup__input-error_active");
+const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inputErrorSelector, ...rest}) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach((formElement) => {
+      const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+      const buttonElement = formElement.querySelector(submitButtonSelector);
+      inputList.forEach((inputElement) => {
+        const errorElement = formElement.querySelector(`${inputErrorSelector}_${inputElement.id}`);
+        setEventListeners(inputElement, inputList, buttonElement, errorElement, rest);
+        });
+  });
 };
 
-const hideInputError = (inputElement, errorElement) => {
-    inputElement.classList.remove("popup__input_type_error");
-    errorElement.classList.remove("popup__input-error_active");
-    errorElement.textContent = "";
+const setEventListeners = (inputElement, inputList, buttonElement, errorElement, {...rest}) => {
+  inputElement.addEventListener("input", () => {
+      isValid(inputElement, errorElement, rest);
+      toggleButtonState(inputList, buttonElement, rest);
+});
 };
 
-const isValid = (inputElement, errorElement) => {
-    if (!inputElement.validity.valid) {
-        showInputError(inputElement, errorElement, inputElement.validationMessage);
-    } else {
-        hideInputError(inputElement, errorElement);
-    }
+const isValid = (inputElement, errorElement, {...rest}) => {
+  if (!inputElement.validity.valid) {
+      showInputError(inputElement, errorElement, inputElement.validationMessage, rest);
+  } else {
+      hideInputError(inputElement, errorElement, rest);
+  }
 };
 
 const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
+  return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+  });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
-    if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add("popup__submit-button_inactive");
-        buttonElement.setAttribute('disabled', true);
-    } else {
-        buttonElement.classList.remove("popup__submit-button_inactive");
-        buttonElement.removeAttribute('disabled');
-    }
+const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
+  if (hasInvalidInput(inputList)) {
+      buttonElement.classList.add(inactiveButtonClass);
+      buttonElement.setAttribute('disabled', true);
+  } else {
+      buttonElement.classList.remove(inactiveButtonClass);
+      buttonElement.removeAttribute('disabled');
+  }
 };
 
-const setEventListeners = (inputElement, inputList, buttonElement, errorElement) => {
-        inputElement.addEventListener("input", () => {
-            isValid(inputElement, errorElement);
-            toggleButtonState(inputList, buttonElement);
-    });
+const showInputError = (inputElement, errorElement, errorMessage, {inputErrorClass, spanErrorClass}) => {
+    inputElement.classList.add(inputErrorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(spanErrorClass);
 };
 
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll(".popup__form"));
-    formList.forEach((formElement) => {
-        const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-        const buttonElement = formElement.querySelector(".popup__submit-button");
-        inputList.forEach((inputElement) => {
-          const errorElement = formElement.querySelector(`.popup__input-error_${inputElement.id}`);
-          setEventListeners(inputElement, inputList, buttonElement, errorElement);
-          });
-    });
+const hideInputError = (inputElement, errorElement, {inputErrorClass, spanErrorClass}) => {
+    inputElement.classList.remove(inputErrorClass);
+    errorElement.classList.remove(spanErrorClass);
+    errorElement.textContent = "";
 };
-
-enableValidation();

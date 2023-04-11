@@ -155,3 +155,4 @@ document.querySelectorAll(".popup__close-button").forEach((button) => {
 });
 
 createContent();
+enableValidation(validationConfig);
