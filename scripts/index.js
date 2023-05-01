@@ -48,7 +48,7 @@ function handleSubmitContentButton(evt) {
 function handleEditProfileButton(evt) {
     popupProfileTitle.value = profileTitle.textContent;
     popupProfileSubtitle.value = profileSubtitle.textContent;
-    clearErrors(popupProfile);
+    profileFormValidation.clearErrors();
     openPopup(popupProfile);
 }
 

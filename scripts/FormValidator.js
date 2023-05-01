@@ -63,7 +63,6 @@ export class FormValidator {
   clearErrors() {
     const errorList = Array.from(this.form.querySelectorAll(this.inputError));
       errorList.forEach((errorElement) => {
-
           errorElement.classList.remove(this.spanErrorClass);
           errorElement.textContent = "";
       });
