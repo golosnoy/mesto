@@ -5,6 +5,8 @@ export class Card {
           this.name = data.name;
           this.link = data.link;
           this.element = this._getTemplate();
+          this.cardTitle = this.element.querySelector(".cards__title")
+          this.cardImage = this.element.querySelector(".cards__image")
   }
 
   _getTemplate() {
@@ -22,8 +24,8 @@ export class Card {
     evt.target.classList.toggle("cards__like_active");
   }
 
-  _handleTrashClick(evt) {
-    evt.target.closest('.cards__element').remove();
+  _handleTrashClick() {
+    this.parentElement.parentElement.remove();
   }
 
   _handleImageClick() {
@@ -35,9 +37,9 @@ export class Card {
 
   generateCard() {
     this._setEventListeners();
-    this.element.querySelector(".cards__title").textContent = this.name;
-    this.element.querySelector(".cards__image").src = this.link;
-    this.element.querySelector(".cards__image").alt = this.name;
+    this.cardTitle.textContent = this.name;
+    this.cardImage.src = this.link;
+    this.cardImage.alt = this.name;
     return this.element;
   }
 
