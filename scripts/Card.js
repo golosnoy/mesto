@@ -2,8 +2,8 @@ import { openPopup, popupImage, popupImageImg, popupImageTitle } from "./utils.j
 
 export class Card {
   constructor(data) {
-          this.name = data.name;
-          this.link = data.link;
+          this._name = data.name;
+          this._link = data.link;
           this.element = this._getTemplate();
           this.cardTitle = this.element.querySelector(".cards__title")
           this.cardImage = this.element.querySelector(".cards__image")
@@ -16,8 +16,8 @@ export class Card {
 
   _setEventListeners() {
     this.element.querySelector(".cards__like").addEventListener("click", this._handleLikeClick);
-    this.element.querySelector(".cards__trash").addEventListener("click",  this._handleTrashClick);
-    this.element.querySelector(".cards__image").addEventListener("click", this._handleImageClick);
+    this.element.querySelector(".cards__trash").addEventListener("click",  this._handleTrashClick.bind(this));
+    this.cardImage.addEventListener("click", this._handleImageClick);
   }
 
   _handleLikeClick(evt) {
@@ -25,7 +25,7 @@ export class Card {
   }
 
   _handleTrashClick() {
-    this.parentElement.parentElement.remove();
+    this.element.remove();;
   }
 
   _handleImageClick() {
@@ -37,9 +37,9 @@ export class Card {
 
   generateCard() {
     this._setEventListeners();
-    this.cardTitle.textContent = this.name;
-    this.cardImage.src = this.link;
-    this.cardImage.alt = this.name;
+    this.cardTitle.textContent = this._name;
+    this.cardImage.src = this._link;
+    this.cardImage.alt = this._name;
     return this.element;
   }
 

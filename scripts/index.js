@@ -8,9 +8,9 @@ const cards = document.querySelector(".cards__elements");
 
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-const editProfileButton = document.querySelector(".profile__edit-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
 
-const addContentButton = document.querySelector(".profile__add-button");
+const contentAddButton = document.querySelector(".profile__add-button");
 
 const popupProfile = document.querySelector(".popup_profile");
 const popupProfileForm = document.querySelector(".popup__form_profile");
@@ -45,7 +45,7 @@ function handleSubmitContentButton(evt) {
   closePopup(popupContent);
 }
 
-function handleEditProfileButton(evt) {
+function handleProfileEditButton(evt) {
     popupProfileTitle.value = profileTitle.textContent;
     popupProfileSubtitle.value = profileSubtitle.textContent;
     profileFormValidation.clearErrors();
@@ -59,16 +59,16 @@ function handleSubmitProfileButton(evt) {
     closePopup(popupProfile);
 }
 
-function handleAddContentButton(evt) {
+function handleContentAddButton(evt) {
     popupContentForm.reset();
     contentFormValidation.activateButton(buttonElement)
     contentFormValidation.clearErrors();
     openPopup(popupContent);
 }
 
-editProfileButton.addEventListener("click", handleEditProfileButton);
+profileEditButton.addEventListener("click", handleProfileEditButton);
 popupProfileForm.addEventListener("submit", handleSubmitProfileButton);
-addContentButton.addEventListener("click", handleAddContentButton);
+contentAddButton.addEventListener("click", handleContentAddButton);
 popupContentForm.addEventListener("submit", handleSubmitContentButton);
 
 closeButtons.forEach((button) => {

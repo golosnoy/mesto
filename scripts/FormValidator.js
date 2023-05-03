@@ -7,12 +7,13 @@ export class FormValidator {
     this.inactiveButtonClass = config.inactiveButtonClass,
     this.inputErrorClass = config.inputErrorClass,
     this.spanErrorClass = config.spanErrorClass
+    this._inputList = Array.from(this.form.querySelectorAll(this.input))
   }
 
-  _setEventListeners(inputElement, inputList, buttonElement, errorElement) {
+  _setEventListeners(inputElement, buttonElement, errorElement) {
     inputElement.addEventListener("input", () => {
         this._isValid(inputElement, errorElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(buttonElement);
   });
   };
 
@@ -24,8 +25,8 @@ export class FormValidator {
     }
   };
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
   };
@@ -40,8 +41,8 @@ export class FormValidator {
     buttonElement.removeAttribute('disabled');
   };
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
+  _toggleButtonState(buttonElement) {
+    if (this._hasInvalidInput(this._inputList)) {
         this.activateButton(buttonElement);
     } else {
         this.inactivateButton(buttonElement);
@@ -66,18 +67,16 @@ export class FormValidator {
           errorElement.classList.remove(this.spanErrorClass);
           errorElement.textContent = "";
       });
-      const inputList = Array.from(this.form.querySelectorAll(this.input));
-      inputList.forEach((inputElement) => {
+      this._inputList.forEach((inputElement) => {
           inputElement.classList.remove(this.inputErrorClass);
       });
   }
 
   enableValidation() {
-    const inputList = Array.from(this.form.querySelectorAll(this.input));
     const buttonElement = this.form.querySelector(this.submitButton);
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       const errorElement = this.form.querySelector(`${this.inputError}_${inputElement.id}`);
-      this._setEventListeners(inputElement, inputList, buttonElement, errorElement);
+      this._setEventListeners(inputElement, buttonElement, errorElement);
       });
   };
 
