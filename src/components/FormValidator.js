@@ -63,14 +63,12 @@ export class FormValidator {
   };
 
   clearErrors() {
-    const errorList = Array.from(this.form.querySelectorAll(this.inputError));
-      errorList.forEach((errorElement) => {
-          errorElement.classList.remove(this.spanErrorClass);
-          errorElement.textContent = "";
-      });
-      this._inputList.forEach((inputElement) => {
-          inputElement.classList.remove(this.inputErrorClass);
-      });
+    this._inputList.forEach((inputElement) => {
+      const errorElement = this.form.querySelector(
+        `${this.inputError}_${inputElement.id}`
+      );
+      this._hideInputError(inputElement, errorElement);
+    });
   }
 
   enableValidation() {

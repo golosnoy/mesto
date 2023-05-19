@@ -6,10 +6,12 @@ export class Section {
   }
 
   renderItems() {
-    this._renderer(this._initialArray);
-  }
+    this._initialArray.forEach((item) => {
+      this._renderer(item);
+  })
+}
 
   addItem(element) {
-    this._container.append(element.generateCard());
+    this._container.append(element);
   }
 };

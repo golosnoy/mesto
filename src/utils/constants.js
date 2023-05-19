@@ -14,12 +14,12 @@ export const imageTitleSelector = ".popup__image-title";
 export const imageSelector = ".popup__image";
 export const formSelector = ".popup__form"
 export const buttonSubmitSelector = ".popup__form";
-export const formInputSelector = ".form__input"
+export const formInputSelector = ".popup__input"
 export const userNameSelector = ".profile__title";
 export const userInfoSelector = ".profile__subtitle";
 export const cardsContainerSelector = ".cards__elements";
 
-export const profileTitle = document.querySelector(".profile__title");
+export const profileTitle = document.querySelector(userNameSelector);
 export const profileSubtitle = document.querySelector(userInfoSelector);
 export const profileEditButton = document.querySelector(".profile__edit-button");
 export const contentAddButton = document.querySelector(".profile__add-button");

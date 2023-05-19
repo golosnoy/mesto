@@ -6,15 +6,17 @@ import {
   cardLikeSelector,
   cardTrashSelector,
   cardLikeActiveSelector
-} from "./constants.js";
+} from "../utils/constants.js";
+
 export class Card {
   constructor(data, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
-    this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick.bind(this);
     this.element = this._getTemplate();
-    this.cardTitle = this.element.querySelector(cardTitleSelector)
-    this.cardImage = this.element.querySelector(cardImageSelector)
+    this.cardTitle = this.element.querySelector(cardTitleSelector);
+    this.cardImage = this.element.querySelector(cardImageSelector);
+    this._handleTrashClick = this._handleTrashClick.bind(this);
   }
 
   _getTemplate() {
@@ -24,8 +26,8 @@ export class Card {
 
   _setEventListeners() {
     this.element.querySelector(cardLikeSelector).addEventListener("click", this._handleLikeClick);
-    this.element.querySelector(cardTrashSelector).addEventListener("click",  this._handleTrashClick.bind(this));
-    this.cardImage.addEventListener("click", this._handleCardClick.bind(this));
+    this.element.querySelector(cardTrashSelector).addEventListener("click",  this._handleTrashClick);
+    this.cardImage.addEventListener("click", this._handleCardClick);
   }
 
   _handleLikeClick(evt) {
