@@ -45,8 +45,8 @@ function handleContentAddButton() {
   popupContent.open();
 }
 
-function handleCardClick() {
-  popupImage.open(this._link, this._name);
+function handleCardClick(link, name) {
+  popupImage.open(link, name);
 }
 
 function renderCards(item) {
@@ -58,13 +58,13 @@ profileEditButton.addEventListener("click", handleProfileEditButton);
 contentAddButton.addEventListener("click", handleContentAddButton);
 
 const popupProfile = new PopupWithForm(popupProfileSelector, (userData) => {
-  popupProfile.setInputValues(userData);
+  userInfo.setUserInfo(userData);
 }
 );
 
 const popupContent = new PopupWithForm(popupContentSelector, (newCardValues) => {
   const newCard = createCard({name: newCardValues.place_name, link: newCardValues.img_url});
-  contentContainer.prepend(newCard);
+  createSection.prependItem(newCard);
 });
 
 const popupImage = new PopupWithImage(popupImageSelector);

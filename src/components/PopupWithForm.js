@@ -33,8 +33,9 @@ export class PopupWithForm extends Popup {
   }
 
   setInputValues(data) {
-    profileTitle.textContent = data.author_name;
-    profileSubtitle.textContent = data.author_about;
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 
 }
