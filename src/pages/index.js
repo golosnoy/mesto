@@ -40,7 +40,7 @@ function handleProfileEditButton() {
 }
 
 function handleContentAddButton() {
-  contentFormValidation.activateButton()
+  contentFormValidation.disableButton()
   contentFormValidation.clearErrors();
   popupContent.open();
 }
