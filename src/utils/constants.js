@@ -38,7 +38,7 @@ export const popupContentPlaceName = document.querySelector("#place_name");
 export const popupContentImageUrl = document.querySelector("#img_url");
 export const buttonElement = popupContentForm.querySelector('.popup__submit-button');
 export const avatarImage = document.querySelector('.profile__avatar');
-export const avatarContainer = document.querySelector('.profile__avatar_container');
+export const avatarContainer = document.querySelector('.profile__avatar-container');
 
 
 export const domen = "https://mesto.nomoreparties.co/v1";
