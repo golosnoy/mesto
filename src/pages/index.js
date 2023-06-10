@@ -7,7 +7,9 @@ import { UserInfo } from "../components/UserInfo.js";
 import { Card } from "../components/Card.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { validationConfig } from "../utils/config.js";
-import { initialCards } from "../utils/cards.js";
+import { Api } from '../components/Api.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
+import { PopupEditAvatar } from '../components/PopupEditAvatar.js';
 
 import {
   popupProfileSelector,
@@ -22,8 +24,27 @@ import {
   popupContentForm,
   popupProfileTitle,
   popupProfileSubtitle,
-  contentContainer
+  userAvatarSelector,
+  domen, token, cohort,
+  popupConfirmationSelector,
+  avatarImage,
+  popupEditAvatarSelector,
+  popupAvatarForm,
+  avatarContainer
 } from "../utils/constants.js";
+
+const userInfo = new UserInfo({userNameSelector, userInfoSelector, userAvatarSelector});
+
+export const api = new Api(domen, token, cohort);
+
+export let userId = null;
+
+api.getAppInfo()
+  .then(([cardsData, userData]) => {
+    userInfo.setUserInfo(userData);
+    userId = userData._id;
+    createSection.renderItems(cardsData);
+  });
 
 function createCard(cardData) {
   const cardElement = new Card(cardData, handleCardClick);
@@ -54,30 +75,52 @@ function renderCards(item) {
   createSection.addItem(newCard);
 }
 
+function handleAvatarClick() {
+  popupEditAvatar.open();
+}
+
 profileEditButton.addEventListener("click", handleProfileEditButton);
+avatarContainer.addEventListener("click", handleAvatarClick)
 contentAddButton.addEventListener("click", handleContentAddButton);
 
 const popupProfile = new PopupWithForm(popupProfileSelector, (userData) => {
-  userInfo.setUserInfo(userData);
+  api.patchUserInfo(userData);
+  api.getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo(userData);
+  });
 }
 );
 
 const popupContent = new PopupWithForm(popupContentSelector, (newCardValues) => {
-  const newCard = createCard({name: newCardValues.place_name, link: newCardValues.img_url});
-  createSection.prependItem(newCard);
+  const newCard = ({name: newCardValues.place_name, link: newCardValues.img_url});
+  api.postCard(newCard)
+  .then((res) => createCard(res))
+  .then((res) => createSection.prependItem(res));
+});
+
+export const popupConfirmation = new PopupWithConfirmation(popupConfirmationSelector);
+export const popupEditAvatar = new PopupEditAvatar(popupEditAvatarSelector, (url) => {
+  api.updateAvatar(url);
+  avatarImage.src = url;
 });
 
 const popupImage = new PopupWithImage(popupImageSelector);
-
-const createSection = new Section({data: initialCards, renderer: renderCards}, cardsContainerSelector);
+const createSection = new Section({renderer: renderCards}, cardsContainerSelector);
 const profileFormValidation = new FormValidator(validationConfig, popupProfileForm);
 const contentFormValidation = new FormValidator(validationConfig, popupContentForm);
-const userInfo = new UserInfo({userNameSelector, userInfoSelector});
+const avatarFormValidation = new FormValidator(validationConfig, popupAvatarForm);
+
 
 popupContent.setEventListeners();
 popupProfile.setEventListeners();
 popupImage.setEventListeners();
+popupConfirmation.setEventListeners();
+popupEditAvatar.setEventListeners();
 
 profileFormValidation.enableValidation();
 contentFormValidation.enableValidation();
-createSection.renderItems();
+avatarFormValidation.enableValidation();
+
+
+
