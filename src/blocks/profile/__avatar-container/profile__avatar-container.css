@@ -6,6 +6,6 @@
   border-radius: 60px;
 }
 
-.profile__avatar-container:hover .profile__avatar_overlay {
+.profile__avatar-container:hover .profile__avatar-overlay {
   opacity: 1;
 }
