@@ -103,7 +103,9 @@ export class Api {
         avatar: url
       })
     })
-    .then(this.checkRes);
+    .then(this.checkRes)
+    .catch((err) =>{
+      console.log(err);
+    });
   }
-
 }

@@ -9,11 +9,8 @@ import {
   cardsLikeCounterSelector
 } from "../utils/constants.js";
 
-import { api } from "../pages/index.js";
-import { userId, popupConfirmation } from "../pages/index.js";
-
 export class Card {
-  constructor(data, handleCardClick) {
+  constructor(data, handleTrashClick, handleLikeClick, handleCardClick, userId) {
     this._name = data.name;
     this._link = data.link;
     this._owner = data.owner._id;
@@ -22,13 +19,14 @@ export class Card {
     this._likeCount = data.likes.length;
     this._userId = userId;
     this._isLiked = false;
+    this._handleTrashClick = handleTrashClick;
+    this._handleLikeClick = handleLikeClick;
     this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
     this._cardTitle = this._element.querySelector(cardTitleSelector);
     this._cardImage = this._element.querySelector(cardImageSelector);
     this._cardTrashButton = this._element.querySelector(cardTrashSelector);
     this._cardLikeCounter = this._element.querySelector(cardsLikeCounterSelector);
-    this._handleTrashClick = this._handleTrashClick.bind(this);
     this._cardLikeButton = this._element.querySelector(cardLikeSelector);
   }
 
@@ -43,49 +41,28 @@ export class Card {
   _setEventListeners() {
     this._cardLikeButton.addEventListener("click", this._handleLikeClick.bind(this));
     if (this._owner === this._userId) {
-      this._cardTrashButton.addEventListener("click",  this._handleTrashClick);
+      this._cardTrashButton.addEventListener("click",  this._handleTrashClick.bind(this));
     };
     this._cardImage.addEventListener("click", this._handleCardClick.bind(null, this._link, this._name));
   }
 
-  _isLikedByUser() {
-    this._likes.forEach((like) => {
-      if (like._id === this._userId) {
-        this._isLiked = true;
-        this._cardLikeButton.classList.add(cardLikeActiveSelector);
-      };
-    });
+  isLiked() {
+    return this._likes.some((like) => like._id === this._userId);
   }
 
-  _handleLikeClick() {
-    if (this._isLiked) {
-      api.dislikeCard(this._id)
-        .then((res) => {
-          this._cardLikeCounter.textContent = res.likes.length;
-        });
-      this._isLiked = false;
-      this._cardLikeButton.classList.remove(cardLikeActiveSelector);
-    } else {
-      api.likeCard(this._id)
-        .then((res) => {
-          this._cardLikeCounter.textContent = res.likes.length;
-      });
-      this._isLiked = true;
-      this._cardLikeButton.classList.add(cardLikeActiveSelector);
-    }
+  _updateLikesView() {
+    this._cardLikeCounter.textContent = this._likes.length;
+    this._cardLikeButton.classList.toggle(cardLikeActiveSelector, this.isLiked());
   }
 
-  _handleTrashClick() {
-    popupConfirmation.open(() => {
-        api.deleteCard(this._id);
-        this._element.remove();
-        this._element = null;
-    });
-  };
+  updateLikes(likes) {
+    this._likes = likes;
+    this._updateLikesView();
+  }
 
   generateCard() {
     this._setEventListeners();
-    this._isLikedByUser();
+    this.updateLikes(this._likes);
     this._cardTitle.textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
