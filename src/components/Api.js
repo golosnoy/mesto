@@ -29,7 +29,7 @@ export class Api {
   }
 
   patchUserInfo(userData) {
-    fetch(`${this._domen}/users/me`, {
+    return fetch(`${this._domen}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -40,6 +40,7 @@ export class Api {
         about: userData.about
       })
     })
+
     .then(this.checkRes);
   }
 
@@ -89,11 +90,12 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(this.checkRes);
+    .then(this.checkRes)
+    .then((res) => (console.log(res)));
   }
 
   updateAvatar(url) {
-    fetch(`${this._domen}/users/me/avatar`, {
+    return fetch(`${this._domen}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,

@@ -18,7 +18,6 @@ export class Card {
     this._likes = data.likes;
     this._likeCount = data.likes.length;
     this._userId = userId;
-    this._isLiked = false;
     this._handleTrashClick = handleTrashClick;
     this._handleLikeClick = handleLikeClick;
     this._handleCardClick = handleCardClick;
@@ -39,11 +38,12 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._cardLikeButton.addEventListener("click", this._handleLikeClick.bind(this));
+    const card = this;
+    this._cardLikeButton.addEventListener("click", this._handleLikeClick.bind(this, card));
     if (this._owner === this._userId) {
-      this._cardTrashButton.addEventListener("click",  this._handleTrashClick.bind(this));
+      this._cardTrashButton.addEventListener("click",  this._handleTrashClick.bind(null,card));
     };
-    this._cardImage.addEventListener("click", this._handleCardClick.bind(null, this._link, this._name));
+    this._cardImage.addEventListener("click", this._handleCardClick.bind(null, card._link, card._name));
   }
 
   isLiked() {
@@ -69,4 +69,10 @@ export class Card {
     this._cardLikeCounter.textContent = this._likeCount;
     return this._element;
   }
+
+  removeCard(card) {
+    card._element.remove();
+    card._element = null;
+  }
+
 };
